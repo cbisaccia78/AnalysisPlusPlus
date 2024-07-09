@@ -1,0 +1,6 @@
+**/*.o
+build/*
+!build/.gitkeep
+
+analysis
+test_driver
