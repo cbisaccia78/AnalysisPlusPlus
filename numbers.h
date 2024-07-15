@@ -72,10 +72,22 @@ public:
     }
     Rational<Scalar>& operator-=(Rational<Scalar> &rhs)
     {
+        Scalar rhsD = rhs.d, lhsD = d, rhsN = rhs.n, lhsN=n;
+        lhsN = lhsN*rhsD - rhsN*lhsD;
+        lhsD = lhsD * rhsD;
+        Scalar _gcd = gcd(lhsN, lhsD);
+        n = lhsN / _gcd;
+        d = lhsD / _gcd;
         return *this;
     }
     Rational<Scalar>& operator*=(Rational<Scalar> &rhs)
     {
+        Scalar rhsD = rhs.d, lhsD = d, rhsN = rhs.n, lhsN=n;
+        lhsN *= rhsN;
+        lhsD *= rhsD;
+        Scalar _gcd = gcd(lhsN, lhsD);
+        n = lhsN / _gcd;
+        d = lhsD / _gcd;
         return *this;
     }
     Rational<Scalar>& operator/=(Rational<Scalar> &rhs)

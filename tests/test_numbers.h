@@ -88,12 +88,87 @@ public:
 
         cout << "passed\n";
     }
-    void testSubtraction(){}
-    void testMultiplication(){}
-    void testDivision(){}
-    void testAdditionAssignment(){}
-    void testSubtractionAssignment(){}
-    void testMultiplicationAssignment(){}
+    void testSubtraction(){
+        cout << "Testing subtraction... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        auto res {R1 - R2};
+        if(res != Rational<int>(3, 20))
+            throw NumberTestException("Subtraction broken.");
+
+        cout << "passed\n"; 
+            
+    }
+    void testMultiplication(){
+        cout << "Testing multiplication... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        auto res {R1 * R2};
+        if(res != Rational<int>(1, 10))
+            throw NumberTestException("Multiplication broken.");
+
+        cout << "passed\n"; 
+    }
+    void testDivision(){
+        cout << "Testing division... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        auto res {R1 / R2};
+        if(res != Rational<int>(8, 5))
+            throw NumberTestException("Division broken.");
+
+        try
+        {
+            R1 / Rational<int>(0);
+        }
+        catch (const runtime_error& e)
+        {
+            cout << "passed\n";
+            return;
+        }
+        catch (const std::exception &e)
+        {
+            throw NumberTestException("Wrong error type thrown on divide by zero");
+        }
+
+        throw NumberTestException("No error thrown on divide by zero");
+    }
+    void testAdditionAssignment(){
+        cout << "Testing addition assignment... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        R1 += R2;
+        if(R1 != Rational<int>(13, 20))
+            throw NumberTestException("Addition assignment broken.");
+
+        cout << "passed\n"; 
+    }
+    void testSubtractionAssignment(){
+        cout << "Testing subtraction assignment... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        R1 -= R2;
+        if(R1 != Rational<int>(3, 20))
+            throw NumberTestException("Subtraction assignment broken.");
+
+        cout << "passed\n"; 
+    }
+    void testMultiplicationAssignment(){
+        cout << "Testing multiplication assignment... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        R1 *= R2;
+        if(R1 != Rational<int>(1, 10))
+            throw NumberTestException("Multiplication assignment broken.");
+
+        cout << "passed\n"; 
+    }
     void testDivisionAssignment(){}
     void testLessThan(){}
     void testLessThanEqualTo(){}
