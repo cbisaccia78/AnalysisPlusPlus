@@ -68,6 +68,7 @@ public:
         Scalar _gcd = gcd(lhsN, lhsD);
         n = lhsN / _gcd;
         d = lhsD / _gcd;
+        return *this;
     }
     Rational<Scalar>& operator-=(Rational<Scalar> &rhs)
     {
