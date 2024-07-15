@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdexcept>
+#include <string>
 
 #include "../numbers.h"
 #include "utilities.h"
@@ -9,11 +11,27 @@ using namespace analysis::numbers;
 namespace tests
 {
 
+class NumberTestException : public runtime_error
+{
+public:
+    NumberTestException(const std::string &what_arg)
+        :runtime_error(what_arg){}
+    
+    NumberTestException()
+        :runtime_error("Generic Number Test Exception."){}
+};
+
 class TestRational : public Test
 {
 public:
     void testConstructor(){
         Rational<int> R {2, 5};
+        if (R.n != 2 || R.d != 5)
+            throw NumberTestException("Error in constructor.");
+        
+        R = Rational<int>(4, 10);
+        if (R.n != 2 || R.d != 5)
+            throw NumberTestException("Fraction not reduced in constructor.");
     }
     void testUnaryPlus(){}
     void testUnaryMinus(){}
