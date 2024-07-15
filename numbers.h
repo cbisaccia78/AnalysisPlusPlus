@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -17,6 +18,9 @@ public:
 
     constexpr Rational(const Scalar &n, const Scalar &d=1)
     {
+        if (d == Scalar(0))
+            throw runtime_error("Cannot have 0 in denominator.");
+
         Scalar _gcd {gcd(n, d)};
         this->n = n / _gcd;
         this->d = d / _gcd;
@@ -25,38 +29,38 @@ public:
 
     // OPERATOR OVERLOADS
 
-    constexpr Rational operator+() const
+    constexpr Rational<Scalar> operator+() const
     {
-        return Rational(abs(n), d);
+        return Rational<Scalar>(abs(n), d);
     }
 
-    constexpr Rational operator-() const
+    constexpr Rational<Scalar> operator-() const
     {
-        return Rational(-n, d);
+        return Rational<Scalar>(-n, d);
     }
 
-    constexpr Rational operator+(const Rational &rhs) const
+    constexpr Rational<Scalar> operator+(const Rational<Scalar> &rhs) const
     {
         Scalar rhsD = rhs.d, lhsD = d, rhsN = rhs.n, lhsN=n;
-        return Rational(lhsN*rhsD + rhsN*lhsD, lhsD*rhsD);
+        return Rational<Scalar>(lhsN*rhsD + rhsN*lhsD, lhsD*rhsD);
     }
 
-    constexpr Rational operator*(const Rational &rhs) const
+    constexpr Rational<Scalar> operator*(const Rational<Scalar> &rhs) const
     {
-        return Rational(n*rhs.n, d*rhs.d);
+        return Rational<Scalar>(n*rhs.n, d*rhs.d);
     }
 
-    constexpr Rational operator-(const Rational &rhs) const
+    constexpr Rational<Scalar> operator-(const Rational<Scalar> &rhs) const
     {
         return *this + (-rhs);
     }
     
-    constexpr Rational operator/(const Rational &rhs) const
+    constexpr Rational<Scalar> operator/(const Rational<Scalar> &rhs) const
     {
-        return Rational(n*rhs.d, d*rhs.n);
+        return Rational<Scalar>(n*rhs.d, d*rhs.n);
     }
     
-    Rational& operator+=(Rational &rhs)
+    Rational<Scalar>& operator+=(Rational<Scalar> &rhs)
     {
         Scalar rhsD = rhs.d, lhsD = d, rhsN = rhs.n, lhsN=n;
         lhsN = lhsN*rhsD + rhsN*lhsD;
@@ -65,42 +69,42 @@ public:
         n = lhsN / _gcd;
         d = lhsD / _gcd;
     }
-    Rational& operator-=(Rational &rhs)
+    Rational<Scalar>& operator-=(Rational<Scalar> &rhs)
     {
         return *this;
     }
-    Rational& operator*=(Rational &rhs)
+    Rational<Scalar>& operator*=(Rational<Scalar> &rhs)
     {
         return *this;
     }
-    Rational& operator/=(Rational &rhs)
+    Rational<Scalar>& operator/=(Rational<Scalar> &rhs)
     {
         return *this;
     }
 
-    bool operator<(const Rational &rhs) const
+    bool operator<(const Rational<Scalar> &rhs) const
     {
         return true;
     }
-    bool operator>(const Rational &rhs) const
+    bool operator>(const Rational<Scalar> &rhs) const
     {
         return true;
     }
-    bool operator<=(const Rational &rhs) const
+    bool operator<=(const Rational<Scalar> &rhs) const
     {
         return true;
     }
-    bool operator>=(const Rational &rhs) const
+    bool operator>=(const Rational<Scalar> &rhs) const
     {
         return true;
     }
-    bool operator==(const Rational &rhs) const
+    bool operator==(const Rational<Scalar> &rhs) const
     {
-        return true;
+        return (this->n == rhs.n) && (this->d == rhs.d);
     }
-    bool operator!=(const Rational &rhs) const
+    bool operator!=(const Rational<Scalar> &rhs) const
     {
-        return true;
+        return !(*this == rhs);
     }
 
     operator int()
@@ -113,21 +117,22 @@ public:
         return double(n) / double(d);
     }
 
-    ostream& operator<<(ostream& os)
+    friend ostream& operator<<(ostream& os, const Rational<Scalar> &rhs)
     {
+        os << rhs.n << '/' << rhs.d;
         return os;
     }
 
-    istream& operator>>(istream& is)
+    friend istream& operator>>(istream& is, const Rational<Scalar> &rhs)
     {
         return is;
     }
     
     // UTILITIES
 
-    constexpr double pow(const Rational &lhs, const Rational &rhs) const
+    constexpr double pow(const Rational<Scalar> &rhs) const
     {
-        double lhs_numeric {double(lhs)};
+        double lhs_numeric {double(*this)};
         double rhs_numeric {double(rhs)};
         return std::pow(lhs_numeric, rhs_numeric);
     }

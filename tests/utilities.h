@@ -9,7 +9,8 @@ using namespace std;
 namespace tests
 {
 
-    string LINE_BREAK {"-----------------------------\n"};
+    string LINE_BREAK {"-----------------------------"};
+    string DOUBLE_LINE_BREAK {"-----------------------------\n\n"};
 
     class Test
     {
@@ -19,7 +20,7 @@ namespace tests
             cout << LINE_BREAK;
             this->_run();
             cout << "All tests passed!\n";
-            cout << LINE_BREAK;
+            cout << DOUBLE_LINE_BREAK;
         }
     protected:
         virtual void _run() = 0;

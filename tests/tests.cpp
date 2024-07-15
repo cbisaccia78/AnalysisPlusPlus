@@ -19,19 +19,19 @@ int main(int argc, char **argv)
     {
         std::cerr << "Error in interpreter tests:\n";
         std::cerr << e.what() << '\n';
-        std::cerr << LINE_BREAK;
+        std::cerr << DOUBLE_LINE_BREAK;
     }
     catch(const NumberTestException &e)
     {
         std::cerr << "Error in number tests:\n";
         std::cerr << e.what() << '\n';
-        std::cerr << LINE_BREAK;
+        std::cerr << DOUBLE_LINE_BREAK;
     }
     catch(const SequencesTestException &e)
     {
         std::cerr << "Error in sequences tests:\n";
         std::cerr << e.what() << '\n';
-        std::cerr << LINE_BREAK;
+        std::cerr << DOUBLE_LINE_BREAK;
     }
     catch(const std::exception& e)
     {
