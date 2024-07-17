@@ -57,6 +57,9 @@ public:
     
     constexpr Rational<Scalar> operator/(const Rational<Scalar> &rhs) const
     {
+        if (rhs.n== Scalar(0))
+            throw runtime_error("Cannot have 0 in denominator.");
+
         return Rational<Scalar>(n*rhs.d, d*rhs.n);
     }
     
@@ -92,24 +95,30 @@ public:
     }
     Rational<Scalar>& operator/=(Rational<Scalar> &rhs)
     {
+        auto rhsn {rhs.n};
+        if (rhsn== Scalar(0))
+            throw runtime_error("Cannot have 0 in denominator.");
+        
+        n*=rhs.d;
+        d*=rhsn;
         return *this;
     }
 
     bool operator<(const Rational<Scalar> &rhs) const
     {
-        return true;
+        return (double(n) / d) < (double(rhs.n) / rhs.d);
     }
     bool operator>(const Rational<Scalar> &rhs) const
     {
-        return true;
+        return (double(n) / d) > (double(rhs.n) / rhs.d);
     }
     bool operator<=(const Rational<Scalar> &rhs) const
     {
-        return true;
+        return (double(n) / d) <= (double(rhs.n) / rhs.d);
     }
     bool operator>=(const Rational<Scalar> &rhs) const
     {
-        return true;
+        return (double(n) / d) >= (double(rhs.n) / rhs.d);
     }
     bool operator==(const Rational<Scalar> &rhs) const
     {
@@ -122,12 +131,12 @@ public:
 
     operator int()
     {
-        return int(n) / int(d);
+        return int(n / d);
     }
 
     operator double()
     {
-        return double(n) / double(d);
+        return double(n) / d;
     }
 
     friend ostream& operator<<(ostream& os, const Rational<Scalar> &rhs)

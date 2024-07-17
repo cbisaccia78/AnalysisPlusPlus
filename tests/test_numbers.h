@@ -169,15 +169,81 @@ public:
 
         cout << "passed\n"; 
     }
-    void testDivisionAssignment(){}
-    void testLessThan(){}
-    void testLessThanEqualTo(){}
-    void testGreaterThan(){}
-    void testGreaterThanEqualTo(){}
-    void testEqual(){}
-    void testNotEqual(){}
+    void testDivisionAssignment(){
+        cout << "Testing division assignment... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        R1 /= R2;
+        if(R1 != Rational<int>(8, 5))
+            throw NumberTestException("Division assignment broken.");
+
+        cout << "passed\n"; 
+    }
+    void testLessThan(){
+        cout << "Testing less than... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        if( R1 < R2 || R1 < R1)
+            throw NumberTestException("less than broken.");
+
+        cout << "passed\n"; 
+    }
+    void testLessThanEqualTo(){
+        cout << "Testing less than equal to... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        if( R1 <= R2 || !(R1 <= R1))
+            throw NumberTestException("less than equal to broken.");
+
+        cout << "passed\n"; 
+    }
+    void testGreaterThan(){
+        cout << "Testing greater than... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        if( R2 > R1 || R1 > R1)
+            throw NumberTestException("greater than broken.");
+
+        cout << "passed\n"; 
+    }
+    void testGreaterThanEqualTo(){
+        cout << "Testing greater than equal to... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        if( R2 >= R1 || !(R1 >= R1))
+            throw NumberTestException("greater than equal to broken.");
+
+        cout << "passed\n"; 
+    }
+    void testEqual(){
+        cout << "Testing equality... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        if( R2 == R1 || !(R1 == R1))
+            throw NumberTestException("equality broken.");
+
+        cout << "passed\n"; 
+    }
+    void testNotEqual(){
+        cout << "Testing greater than... ";
+
+        Rational<int> R1(2,5);
+        Rational<int> R2(1,4);
+        if( R2 > R1 || R1 > R1)
+            throw NumberTestException("less than broken.");
+
+        cout << "passed\n"; 
+    }
     void testInputOperator(){}
     void testOutputOperator(){}
+    void testPow(){}
+    void testGcd(){}
 
 protected:
     void _run() override
@@ -202,7 +268,8 @@ protected:
         testNotEqual();
         testInputOperator();
         testOutputOperator();
-        
+        testPow();
+        testGcd();
     }
 };
 
