@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+#include <type_traits>
 
 using namespace std;
 
@@ -9,7 +10,10 @@ namespace analysis
 namespace numbers
 {
 
-template <typename Scalar>
+template <typename T>
+concept Arithmetic = is_arithmetic_v<T>;
+
+template <Arithmetic Scalar>
 class Rational
 {
 public:
