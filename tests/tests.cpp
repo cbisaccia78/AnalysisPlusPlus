@@ -4,6 +4,7 @@
 #include "test_interpreter.h"
 #include "test_numbers.h"
 #include "test_sequences.h"
+#include "test_series.h"
 
 using namespace tests;
 
@@ -14,6 +15,7 @@ int main(int argc, char **argv)
         test_interpreter();
         test_numbers();
         test_sequences();
+        test_series();
     }
     catch(const InterpreterTestException &e)
     {
@@ -30,6 +32,12 @@ int main(int argc, char **argv)
     catch(const SequencesTestException &e)
     {
         std::cerr << "\n\nError in sequences tests:\n";
+        std::cerr << e.what() << '\n';
+        std::cerr << DOUBLE_LINE_BREAK;
+    }
+    catch(const SeriesTestException &e)
+    {
+        std::cerr << "\n\nError in series tests:\n";
         std::cerr << e.what() << '\n';
         std::cerr << DOUBLE_LINE_BREAK;
     }
