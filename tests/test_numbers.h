@@ -6,7 +6,7 @@
 #include "utilities.h"
 
 using namespace std;
-using namespace analysis::numbers;
+using namespace analysis;
 
 namespace tests
 {
