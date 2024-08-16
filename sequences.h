@@ -5,9 +5,6 @@
 
 namespace analysis
 {
-namespace sequences
-{
-
 class EndOfSequenceException : public std::out_of_range
 {};
 
@@ -36,5 +33,4 @@ protected:
 
 };
 
-}
 }
