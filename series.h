@@ -1,9 +1,16 @@
+#include "expressions.h"
+
 namespace analysis
 {
-namespace series
+
+template <Arithmetic Scalar>
+class SeriesGenerator
 {
+public:
+    SeriesGenerator(Expression<Scalar> expression)
+        : expression(expression){}
 
+    Expression<Scalar> expression;
+};
 
-
-}
 }
