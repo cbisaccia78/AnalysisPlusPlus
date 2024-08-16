@@ -5,6 +5,7 @@
 #include "test_numbers.h"
 #include "test_sequences.h"
 #include "test_series.h"
+#include "test_expressions.h"
 
 using namespace tests;
 
@@ -16,6 +17,7 @@ int main(int argc, char **argv)
         test_numbers();
         test_sequences();
         test_series();
+        test_expressions();
     }
     catch(const InterpreterTestException &e)
     {
@@ -36,6 +38,12 @@ int main(int argc, char **argv)
         std::cerr << DOUBLE_LINE_BREAK;
     }
     catch(const SeriesTestException &e)
+    {
+        std::cerr << "\n\nError in series tests:\n";
+        std::cerr << e.what() << '\n';
+        std::cerr << DOUBLE_LINE_BREAK;
+    }
+    catch(const ExpressionTestException &e)
     {
         std::cerr << "\n\nError in series tests:\n";
         std::cerr << e.what() << '\n';
