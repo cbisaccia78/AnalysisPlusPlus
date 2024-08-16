@@ -7,8 +7,6 @@ using namespace std;
 
 namespace analysis
 {
-namespace numbers
-{
 
 template <typename T>
 concept Arithmetic = is_arithmetic_v<T>;
@@ -171,5 +169,4 @@ public:
     Scalar n, d;
 };
 
-}
 }
